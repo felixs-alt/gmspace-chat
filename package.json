@@ -1,0 +1,16 @@
+{
+  "name": "gmspace-chat",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "nodemon main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7",
+    "ws": "^8.18.0"
+  }
+}
