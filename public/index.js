@@ -1,15 +1,29 @@
 const ws = new WebSocket("wss://2929-felixsalt-gmspacechat-c375sh9okr5.ws-eu116.gitpod.io/")
 const username = document.getElementById("username")
-if(localStorage.id == undefined){
-    if(username.value == "")
-    localStorage.id = "User"+Math.round(Math.random() * (100 - 1) + 1);
-    document.getElementById(username)
+if(localStorage.id){
+    username.value = localStorage.id
 }
 
-document.getElementById("send").onclick = async function(){
+document.getElementById("send").onclick = sendMessge
+document.getElementById("msg").onkeydown = async function(e){
+    if(e.key == "Enter"){
+        sendMessge()
+    }
+}
+async function sendMessge(){
     const msg = document.getElementById("msg").value
-    console.log(ws.OPEN)
-    ws.send(String(localStorage.id+" | "+msg))
+    if (msg == "") {
+        return
+    }
+    var id = ""
+    if(username.value == "") {
+        id = "Anon"
+    } else {
+        localStorage.id = username.value
+        id = username.value
+    }
+    ws.send(String(id+" | "+msg))
+    document.getElementById("msg").value = ""
 }
 ws.onmessage = function(msg){
     msg = new Date().toLocaleTimeString("en-GB",{hour: "numeric",minute: "2-digit"})+" | "+msg.data+"\n"

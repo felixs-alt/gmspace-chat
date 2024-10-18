@@ -12,7 +12,7 @@
         background-color: #17ff8e;
         border-radius: 10px;
         padding-right: 5px;
-        width: 45%;
+        width: 90%;
     }
     #msg {
         background-color: #000000e1;
@@ -35,13 +35,14 @@
         background-color: #17ff8e;
         color:black;
         border-radius: 5px;
-        border-style: solid;
         border-color: #17ff8e;
         bottom: 0;
-        left: 46%;
+        left: 91%;
+        transition: all 0.1s ease-in-out;
     }
     #send:hover {
-        transform: scale(1.1);
+        transform: translateX(-10%) translateY(-10%) scale(1.1);
+        box-shadow: 2px 2px #0ea35b
     }
     #res {
         width: 100ww;
@@ -52,7 +53,7 @@
 </head>
 <body>
 <div id="inputs">
-    <input placeholder="Username" id="username"></input><input id="msg" placeholder="Message" type="text"></input>
+    <input placeholder="Username" id="username"></input><input id="msg" placeholder="Message" onkeydown="sendMessage()" type="text"></input>
 </div>
 <button id="send">Send</button>
 <b id="res"></b>
