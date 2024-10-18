@@ -1,6 +1,9 @@
 const ws = new WebSocket("wss://2929-felixsalt-gmspacechat-c375sh9okr5.ws-eu116.gitpod.io/")
+const username = document.getElementById("username")
 if(localStorage.id == undefined){
+    if(username.value == "")
     localStorage.id = "User"+Math.round(Math.random() * (100 - 1) + 1);
+    document.getElementById(username)
 }
 
 document.getElementById("send").onclick = async function(){

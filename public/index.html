@@ -9,7 +9,40 @@
         left: 0;
         position:fixed;
         z-index:150;
-    } 
+        background-color: #17ff8e;
+        border-radius: 10px;
+        padding-right: 5px;
+        width: 45%;
+    }
+    #msg {
+        background-color: #000000e1;
+        border-color: #17ff8e;
+        color: #17ff8e;
+        border-style: solid;
+        border-radius: 5px;
+        width: 80%;
+    }
+    #username {
+        background-color: #000000e1;
+        border-color: #17ff8e;
+        color: #17ff8e;
+        width: 20%;
+        border-style: solid;
+        border-radius: 5px;
+    }
+    #send {
+        position: fixed;
+        background-color: #17ff8e;
+        color:black;
+        border-radius: 5px;
+        border-style: solid;
+        border-color: #17ff8e;
+        bottom: 0;
+        left: 46%;
+    }
+    #send:hover {
+        transform: scale(1.1);
+    }
     #res {
         width: 100ww;
         max-height: 100wh;
@@ -19,8 +52,9 @@
 </head>
 <body>
 <div id="inputs">
-    <input id="msg" type="text"></input><input id="send" type="submit"></input>
+    <input placeholder="Username" id="username"></input><input id="msg" placeholder="Message" type="text"></input>
 </div>
+<button id="send">Send</button>
 <b id="res"></b>
 <br id="bottom">
 <script src="index.js"></script>
