@@ -53,7 +53,7 @@
 </head>
 <body>
 <div id="inputs">
-    <input placeholder="Username" id="username"></input><input id="msg" placeholder="Message" onkeydown="sendMessage()" type="text"></input>
+    <input placeholder="Username" minlength="3" maxlength="10" id="username"></input><input id="msg" minlength="1" placeholder="Message" onkeydown="sendMessage()" type="text"></input>
 </div>
 <button id="send">Send</button>
 <b id="res"></b>
