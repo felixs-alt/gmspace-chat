@@ -1,9 +1,16 @@
 const express = require('express')
 const ws = require('ws')
+var request = require('request');
 const app = express()
 const wss = new ws.WebSocketServer({ port: 2929 });
 const port = 3000
 app.use("/", express.static(__dirname+'/public'));
+
+app.get('/proxy', function(req,res) {
+  var newurl = req.query.url
+  request(newurl).pipe(res);
+});
+
 wss.on('connection', function connection(ws) {
   ws.rawData
   ws.on('error', console.error);
