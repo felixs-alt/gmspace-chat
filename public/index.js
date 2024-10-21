@@ -22,7 +22,7 @@ async function sendMessge(){
         localStorage.id = username.value
         id = username.value
     }
-    ws.send(String("<"+id+"> "+msg))
+    ws.send(String("("+id+") "+msg))
     document.getElementById("msg").value = ""
 }
 ws.onmessage = function(msg){
