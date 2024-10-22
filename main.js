@@ -1,11 +1,12 @@
 const express = require('express')
 const ws = require('ws')
 var request = require('request');
+const socketio = require('socket.io');
 var cors = require('cors')
 const app = express()
 const wss = new ws.WebSocketServer({ port: 2929,clientTracking: true });
 const port = 3000
-let userCount = 0;
+let userCount = 1;
 
 app.use(cors())
 app.use("/", express.static(__dirname+'/public'));
@@ -27,17 +28,15 @@ wss.on('connection', function connection(ws) {
     };
   });
 });
+const server = app.listen(port, () => console.log(`Server started on port ${port}.`));
+const io = socketio(server);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-setInterval(update,2000)
-function update(){
-  if (wss.clients.size > 0){
-    let tempcount = 0
-    wss.clients.forEach(function(client){
-      tempcount++
-    })
-    userCount = tempcount
-  }
-}
+io.on('connection', socket => {
+  userCount++;
+  io.emit('user-count-change', userCount);
+
+  socket.on('disconnect', () => {
+    userCount--;
+    io.emit('user-count-change', userCount);
+  });
+});

@@ -1,4 +1,4 @@
-const ws = new WebSocket("wss://https://gmspace-chat.fly.dev:2929")
+const ws = new WebSocket("wss://gmspace-chat.fly.dev:2929")
 const username = document.getElementById("username")
 if(localStorage.id){
     username.value = localStorage.id
