@@ -1,4 +1,4 @@
-const ws = new WebSocket("wss://gmspace-chat.fly.dev:2929")
+const ws = new WebSocket("wss://https://gmspace-chat.fly.dev:2929")
 const username = document.getElementById("username")
 if(localStorage.id){
     username.value = localStorage.id
@@ -30,4 +30,8 @@ ws.onmessage = function(msg){
     document.getElementById("res").innerHTML+=msg
     window.scrollTo(0, document.body.scrollHeight);
 }
-
+ws.onopen = () => {
+    setInterval(() => {
+        ws.send("ping")
+    }, 3000);
+}
