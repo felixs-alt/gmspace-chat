@@ -6,13 +6,12 @@ var cors = require('cors')
 const app = express()
 const wss = new ws.WebSocketServer({ port: 2929,clientTracking: true });
 const port = 3000
-let userCount = 1;
 
 app.use(cors())
 app.use("/", express.static(__dirname+'/public'));
 
 app.get('/api/users', function(req,res) {
-  res.send(String(userCount))
+  res.send(String(socketIO.engine.clientsCount))
 });
 
 wss.on('connection', function connection(ws) {
@@ -29,14 +28,16 @@ wss.on('connection', function connection(ws) {
   });
 });
 const server = app.listen(port, () => console.log(`Server started on port ${port}.`));
-const io = socketio(server);
-
+const io = socketio(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
 io.on('connection', socket => {
-  userCount++;
-  io.emit('user-count-change', userCount);
+  io.emit('user-count-change', socketIO.engine.clientsCount);
 
   socket.on('disconnect', () => {
-    userCount--;
-    io.emit('user-count-change', userCount);
+    io.emit('user-count-change', socketIO.engine.clientsCount);
   });
 });
