@@ -12,7 +12,7 @@ app.use(cors())
 app.use("/", express.static(__dirname+'/public'));
 
 app.get('/api/users', function(req,res) {
-  res.send(String(socketio.sockets))
+  res.send(String(userCount))
 });
 
 wss.on('connection', function connection(ws) {
