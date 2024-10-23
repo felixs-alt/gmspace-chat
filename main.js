@@ -6,12 +6,13 @@ var cors = require('cors')
 const app = express()
 const wss = new ws.WebSocketServer({ port: 2929,clientTracking: true });
 const port = 3000
+let userCount = 1;
 
 app.use(cors())
 app.use("/", express.static(__dirname+'/public'));
 
 app.get('/api/users', function(req,res) {
-  res.send(String(socketIO.engine.clientsCount))
+  res.send(String(socketio.sockets))
 });
 
 wss.on('connection', function connection(ws) {
@@ -34,10 +35,13 @@ const io = socketio(server, {
     methods: ["GET", "POST"]
   }
 });
+
 io.on('connection', socket => {
-  io.emit('user-count-change', socketIO.engine.clientsCount);
+  userCount = socket.adapter.sids.size
+  io.emit('user-count-change', userCount);
 
   socket.on('disconnect', () => {
-    io.emit('user-count-change', socketIO.engine.clientsCount);
+    userCount = socket.adapter.sids.size
+    io.emit('user-count-change', userCount);
   });
 });
