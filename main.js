@@ -17,12 +17,12 @@ app.get('/api/users', function(req,res) {
 });
 
 app.get('/api/tmrw', function(req,res) {
-  res.send(String(tmrw))
+  res.send(tmrw)
 })
 
 async function weather(){
   const res = await fetch('https://api.tomorrow.io/v4/weather/realtime?location=Lomma&apikey=FY9b7HbawyBktGnvUyvX63l3cZW4NmqW', options)
-  tmrw = await res.json();
+  tmrw = await res.json()
   setTimeout(weather,60000)
 }
 weather()
