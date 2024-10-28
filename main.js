@@ -5,6 +5,7 @@ var cors = require('cors')
 const app = express()
 const wss = new ws.WebSocketServer({ port: 2929,clientTracking: true });
 const port = 3000
+const options = {method: 'GET', headers: {accept: 'application/json'}};
 let userCount = 1;
 var tmrw;
 
