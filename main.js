@@ -30,6 +30,8 @@ wss.on('connection', function connection(ws) {
 });
 const server = app.listen(port, () => console.log(`Server started on port ${port}.`));
 const io = socketio(server, {
+  pingInterval: 2000,
+  pingTimeout: 1000,
   cors: {
     origin: "*",
     methods: ["GET", "POST"]
