@@ -1,21 +1,12 @@
 const express = require('express')
 const ws = require('ws')
-var request = require('request');
-const crypto = require('crypto');
 const socketio = require('socket.io');
 var cors = require('cors')
 const app = express()
 const wss = new ws.WebSocketServer({ port: 2929,clientTracking: true });
 const port = 3000
 let userCount = 1;
-const secret = '175bfc31f2df4eddbe58df28bcae676b';
-
-// signing the secret with the timestamp from the request
-function sign(secret, timestamp) {
-  const hmac = crypto.createHmac('sha256', secret);
-  hmac.update(timestamp);
-  return hmac.digest('hex');
-}
+var tmrw;
 
 app.use(cors())
 app.use("/", express.static(__dirname+'/public'));
@@ -24,18 +15,17 @@ app.get('/api/users', function(req,res) {
   res.send(String(userCount))
 });
 
-app.post("/tmrw", (req, res) => {
-  console.log(req.body) // Call your action on the request here
-  // tomorrow.io signature header is "t={timestamp},sig={signature}"
-  const signatureHeader = req.headers['X-Signature'].split(',');
-  // extract timestamp
-  const timestamp = signatureHeader[0].split('=')[1];
-  // extract signature
-  const signature = signatureHeader[1].split('=')[1];
-  // getting the expected signature
-  const expectedSignature = sign(secret, timestamp);
-  res.status(200).end() // Responding is important
+app.get('/api/tmrw', function(req,res) {
+  res.send(String(tmrw))
 })
+
+async function weather(){
+  const res = await fetch('https://api.tomorrow.io/v4/weather/realtime?location=Lomma&apikey=FY9b7HbawyBktGnvUyvX63l3cZW4NmqW', options)
+  tmrw = await res.json();
+  setTimeout(weather,60000)
+}
+weather()
+
 
 wss.on('connection', function connection(ws) {
   ws.on('error', console.error);
