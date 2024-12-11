@@ -1,5 +1,5 @@
 const btn = document.getElementById("btn")
-const sock = new WebSocket("ws://localhost:2939")
+const sock = new WebSocket("wss://gmspace-chat.fly.dev:2939")
 var clicks = 0
 var multiplier = 1
 var id = []
