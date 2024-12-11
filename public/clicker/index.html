@@ -2,8 +2,8 @@
     <link rel="stylesheet" href="./index.css">
 </head>
 <body>
-  <center>
-    <button type="button" id="btn" class="btn">
+  <canvas id="canvas"></canvas>
+    <button type="button" id="btn" class="btn" onkeyup="event.preventDefault()">
       <strong id="btntext"></strong>
       <div id="container-stars">
         <div id="stars"></div>
@@ -14,9 +14,9 @@
         <div class="circle"></div>
       </div>
     </button>
-    </center>
-    <input placeholder="Username" class="input" id="username" name="text" type="text">
+    <input placeholder="Username" class="input" id="username" name="text" type="text" maxlength="17">
     <div class="leadercontainer"></div>
     <a id="clicknum"></a>
+    <script src="particles.js"></script>
     <script src="index.js"></script>
 </body>
