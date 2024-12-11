@@ -2,6 +2,7 @@
 
 body {
     background-color: #252525;
+    height: 200%;
 }
 .btn {
   display: flex;
@@ -29,6 +30,7 @@ body {
   background-origin: border-box;
   background-clip: content-box, border-box;
   font-family: "Orbitron", sans-serif;
+  position:fixed;
 }
 
 #container-stars {
@@ -200,6 +202,10 @@ strong {
   }
 }
 /* From Uiverse.io by garerim */ 
+#username {
+  position:absolute;
+  top: 10px;
+}
 .input {
   margin: 30px;
   background: none;
@@ -212,4 +218,71 @@ strong {
   box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
   color: #fff;
   text-shadow: #fff 0px 0px 10px;
+}
+#clicknum {
+  color:#fff
+}
+
+.leadercontainer {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  right:0
+}
+
+:root {
+  --team-height: 40px;
+  --team-spacing: 10px;
+}
+
+.team {
+  position: absolute;
+  width: 90%;
+  height: var(--team-height);
+  background: var(--color);
+  box-shadow: 0 3px 5px #0000001f;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(var(--i) * (var(--team-height) + var(--team-spacing)));
+  display: flex;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+
+  align-items: center;
+  transition-property: top;
+  transition-duration: 500ms;
+  border-radius: 10px;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+}
+
+.name {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.score {
+  width: var(--team-height);
+  margin: 20px 0;
+  font-size: 1.4rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+
+
+.team i {
+  width: 80px;
+  height: var(--team-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 1.8rem;
 }
