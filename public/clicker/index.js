@@ -84,7 +84,7 @@ sock.onopen = () => {
     updateClicks()
     setInterval(updateClicks,175)
 }
-sock.onmessage = async function(msg){ 
+sock.onmessage = async function(msg){   
     data = JSON.parse(msg.data)
     leader[data[0][0]] = { rank: 0, name: data[0][1], score: data[1], color:data[0][2]}
     localStorage.leader = btoa(JSON.stringify(leader))
