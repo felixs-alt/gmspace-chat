@@ -35,9 +35,18 @@ if (!localStorage.user) {
             document.getElementById("btntext").innerHTML = clicks
         })
     }
+    multiplier = Number(String(Math.floor(clicks / 1000) * 1000)[0]);
+    if (multiplier > 1) {
+        multiplier(multiplier)
+    }
 }
 
 function OnClick() {
+    newmultiplier = Number(String(Math.floor(clicks / 1000) * 1000)[0]);
+    if (newmultiplier > multiplier) {
+        multiplier = newmultiplier
+        multiplier(multiplier)
+    }
     clicks = Number(clicks) + multiplier
     document.getElementById("btntext").innerHTML = clicks
 }
