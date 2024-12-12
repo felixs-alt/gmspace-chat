@@ -17,6 +17,14 @@ primary_region = 'cdg'
       port = 2929
 
 [[services]]
+    internal_port = 2939
+    protocol = 'tcp'
+
+  [[services.ports]]
+      handlers = ["tls", "http"]
+      port = 2939
+
+[[services]]
     internal_port = 3000
     protocol = 'tcp'
 
